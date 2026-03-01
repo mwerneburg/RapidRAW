@@ -345,10 +345,6 @@ pub struct AppSettings {
     pub last_export_path: Option<String>,
     #[serde(default)]
     pub last_export_format: Option<String>,
-    /// When true, denoising operates in CBM3D mode (separate luma/chroma sigma).
-    /// Defaults to true — better chroma noise handling for small sensors.
-    #[serde(default)]
-    pub cbm3d_denoising: Option<bool>,
 }
 
 fn default_adjustment_visibility() -> HashMap<String, bool> {
@@ -411,7 +407,6 @@ impl Default for AppSettings {
             create_xmp_if_missing: Some(false),
             last_export_path: None,
             last_export_format: None,
-            cbm3d_denoising: Some(true),
         }
     }
 }

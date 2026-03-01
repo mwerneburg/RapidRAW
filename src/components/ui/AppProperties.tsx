@@ -153,7 +153,6 @@ export interface AppSettings {
   createXmpIfMissing?: boolean;
   lastExportPath?: string;
   lastExportFormat?: string;
-  cbm3dDenoising?: boolean;
 }
 
 export interface BrushSettings {
