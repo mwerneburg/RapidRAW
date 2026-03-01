@@ -3021,7 +3021,7 @@ function App() {
     }
   }
 
-  const handleApplyDenoise = useCallback(async (intensity: number) => {
+  const handleApplyDenoise = useCallback(async (intensity: number, useCbm3d: boolean) => {
     if (!denoiseModalState.targetPath) return;
 
     setDenoiseModalState(prev => ({
@@ -3034,7 +3034,8 @@ function App() {
     try {
         await invoke(Invokes.ApplyDenoising, {
             path: denoiseModalState.targetPath,
-            intensity: intensity
+            intensity: intensity,
+            useCbm3d: useCbm3d,
         });
     } catch (err) {
         setDenoiseModalState(prev => ({
@@ -4933,11 +4934,15 @@ function App() {
         onDenoise={handleApplyDenoise}
         onSave={handleSaveDenoisedImage}
         onOpenFile={handleImageSelect}
+        onModeChange={(useCbm3d) => {
+          if (appSettings) onSettingsChange({ ...appSettings, cbm3dDenoising: useCbm3d });
+        }}
         previewBase64={denoiseModalState.previewBase64}
         originalBase64={denoiseModalState.originalBase64 || null}
         isProcessing={denoiseModalState.isProcessing}
         error={denoiseModalState.error}
         progressMessage={denoiseModalState.progressMessage}
+        defaultUseCbm3d={appSettings?.cbm3dDenoising ?? true}
       />
       <CreateFolderModal
         isOpen={isCreateFolderModalOpen}
