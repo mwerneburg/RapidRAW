@@ -24,6 +24,7 @@ interface KeyboardShortcutsProps {
   handleSetColorLabel(label: string | null): void;
   handleToggleFullScreen(): void;
   handleZoomChange(zoomValue: number, fitToWindow?: boolean): void;
+  refreshFolderTree(): void;
   isFullScreen: boolean;
   isModalOpen: boolean;
   isStraightenActive: boolean;
@@ -73,6 +74,7 @@ export const useKeyboardShortcuts = ({
   handleSetColorLabel,
   handleToggleFullScreen,
   handleZoomChange,
+  refreshFolderTree,
   isFullScreen,
   isModalOpen,
   isStraightenActive,
@@ -394,6 +396,11 @@ export const useKeyboardShortcuts = ({
             break;
         }
       }
+
+      if (event.key === 'F5') {
+        event.preventDefault();
+        refreshFolderTree();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -422,6 +429,7 @@ export const useKeyboardShortcuts = ({
     handleSetColorLabel,
     handleToggleFullScreen,
     handleZoomChange,
+    refreshFolderTree,
     isFullScreen,
     isStraightenActive,
     isViewLoading,
